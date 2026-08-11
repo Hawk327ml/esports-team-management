@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/17" 
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.esports.controller.PlayerDialogController"
+      spacing="15" style="-fx-padding: 25;" prefWidth="450">
+    
+    <Label fx:id="dialogTitle" text="Add New Player (添加新选手)" 
+           style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+    
+    <GridPane hgap="10" vgap="15">
+        <!-- Row 0: Game ID (第0行：游戏ID) -->
+        <Label text="Game ID (游戏ID)*:" GridPane.rowIndex="0" GridPane.columnIndex="0" 
+               style="-fx-font-weight: bold;" />
+        <TextField fx:id="txtUsername" GridPane.rowIndex="0" GridPane.columnIndex="1" 
+                  GridPane.columnSpan="2" prefWidth="300" 
+                  promptText="For example (例如): Faker" />
+        
+        <!-- Row 1: Real name (第1行：真实姓名) -->
+        <Label text="Real Name (真实姓名):" GridPane.rowIndex="1" GridPane.columnIndex="0" 
+               style="-fx-font-weight: bold;" />
+        <TextField fx:id="txtRealName" GridPane.rowIndex="1" GridPane.columnIndex="1" 
+                  GridPane.columnSpan="2" prefWidth="300" 
+                  promptText="For example (例如): Lee Sang-hyeok" />
+        
+        <!-- Row 2: Age (第2行：年龄) -->
+        <Label text="Age (年龄)*:" GridPane.rowIndex="2" GridPane.columnIndex="0" 
+               style="-fx-font-weight: bold;" />
+        <Spinner fx:id="spnAge" GridPane.rowIndex="2" GridPane.columnIndex="1" 
+                 prefWidth="150" editable="true" />
+        
+        <!-- Row 3: Position (第3行：位置) -->
+        <Label text="Position (位置)*:" GridPane.rowIndex="3" GridPane.columnIndex="0" 
+               style="-fx-font-weight: bold;" />
+        <ComboBox fx:id="cmbPosition" GridPane.rowIndex="3" GridPane.columnIndex="1" 
+                  prefWidth="150" />
+        
+        <!-- Row 4: Nationality (第4行：国籍) -->
+        <Label text="Nationality (国籍):" GridPane.rowIndex="4" GridPane.columnIndex="0" 
+               style="-fx-font-weight: bold;" />
+        <TextField fx:id="txtNationality" GridPane.rowIndex="4" GridPane.columnIndex="1" 
+                  GridPane.columnSpan="2" prefWidth="300" 
+                  promptText="For example (例如): South Korea" />
+        
+        <!-- Row 5: Join date (第5行：加入日期) -->
+        <Label text="Join Date (加入日期)*:" GridPane.rowIndex="5" GridPane.columnIndex="0" 
+               style="-fx-font-weight: bold;" />
+        <DatePicker fx:id="dpJoinDate" GridPane.rowIndex="5" GridPane.columnIndex="1" 
+                    prefWidth="150" />
+        
+        <!-- Row 6: Monthly salary (第6行：月薪) -->
+        <Label text="Monthly Salary (月薪)*:" GridPane.rowIndex="6" GridPane.columnIndex="0" 
+               style="-fx-font-weight: bold;" />
+        <TextField fx:id="txtSalary" GridPane.rowIndex="6" GridPane.columnIndex="1" 
+                  prefWidth="150" promptText="For example (例如): 1000000.00" />
+        
+        <!-- Row 7: Status (第7行：状态) -->
+        <Label text="Status (状态)*:" GridPane.rowIndex="7" GridPane.columnIndex="0" 
+               style="-fx-font-weight: bold;" />
+        <ComboBox fx:id="cmbStatus" GridPane.rowIndex="7" GridPane.columnIndex="1" 
+                  prefWidth="150" />
+    </GridPane>
+    
+    <Label text="* indicates required fields (* 表示必填项)" style="-fx-font-size: 11; -fx-text-fill: #7f8c8d;" />
+    
+    <HBox spacing="20" alignment="CENTER_RIGHT" style="-fx-padding: 20 0 0 0;">
+        <Button text="Cancel (取消)" onAction="#handleCancel" 
+                style="-fx-pref-width: 80;" />
+        <Button text="Save (保存)" onAction="#handleSave" 
+                style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-pref-width: 80; -fx-font-weight: bold;" />
+    </HBox>
+</VBox>

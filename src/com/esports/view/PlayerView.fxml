@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/17" 
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.esports.controller.PlayerController"
+      spacing="10" style="-fx-padding: 20;">
+    
+    <!-- 标题和按钮栏 -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="👥 选手管理" style="-fx-font-size: 20; -fx-font-weight: bold;" />
+        <Pane HBox.hgrow="ALWAYS" />
+        <Button text="🔄 刷新" style="-fx-background-color: #3498db; -fx-text-fill: white;" 
+                onAction="#refreshPlayers" />
+        <Button text="➕ 添加选手" style="-fx-background-color: #2ecc71; -fx-text-fill: white;" 
+                onAction="#showAddPlayerDialog" />
+        <Button text="✏️ 编辑" style="-fx-background-color: #f39c12; -fx-text-fill: white;" 
+                onAction="#showEditPlayerDialog" />
+        <Button text="🗑️ 删除" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" 
+                onAction="#deleteSelectedPlayer" />
+        <Button text="📝 查看合同" style="-fx-background-color: #9b59b6; -fx-text-fill: white;" 
+                onAction="#showPlayerContracts" />
+        <Button text="🏆 比赛记录" style="-fx-background-color: #1abc9c; -fx-text-fill: white;" 
+                onAction="#showPlayerTournaments" />
+    </HBox>
+    
+    <!-- 搜索和筛选 -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="搜索:" style="-fx-font-weight: bold;" />
+        <TextField fx:id="txtSearch" promptText="输入选手名或真实姓名..." style="-fx-pref-width: 200;" />
+        
+        <Label text="位置:" style="-fx-padding: 0 5 0 20;" />
+        <ComboBox fx:id="cmbPosition" style="-fx-pref-width: 120;" />
+        
+        <Label text="状态:" style="-fx-padding: 0 5 0 10;" />
+        <ComboBox fx:id="cmbStatus" style="-fx-pref-width: 120;" />
+        
+        <Button text="🔍 搜索" onAction="#searchPlayers" style="-fx-background-color: #3498db; -fx-text-fill: white;" />
+        <Button text="📋 显示全部" onAction="#showAllPlayers" />
+    </HBox>
+    
+    <!-- 选手详细信息 -->
+    <Label fx:id="lblPlayerInfo" style="-fx-font-size: 12; -fx-text-fill: #7f8c8d; -fx-padding: 5 0;" />
+    
+    <!-- 选手表格 -->
+    <TableView fx:id="tblPlayers" VBox.vgrow="ALWAYS" style="-fx-font-size: 12;">
+        <columns>
+            <TableColumn text="ID" />
+            <TableColumn text="选手" />
+            <TableColumn text="年龄" />
+            <TableColumn text="位置" />
+            <TableColumn text="国籍" />
+            <TableColumn text="加入日期" />
+            <TableColumn text="月薪" />
+            <TableColumn text="状态" />
+        </columns>
+    </TableView>
+    
+    <!-- 信息统计 -->
+    <HBox spacing="30" alignment="CENTER">
+        <Label fx:id="lblTotalPlayers" text="选手总数: 0" style="-fx-font-weight: bold;" />
+        <Label fx:id="lblAverageAge" text="平均年龄: 0" style="-fx-font-weight: bold;" />
+        <Label fx:id="lblTotalSalary" text="总月薪: ¥0" style="-fx-font-weight: bold;" />
+    </HBox>
+</VBox>

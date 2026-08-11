@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esports.controller.TournamentController">
+    <top>
+        <HBox alignment="CENTER" style="-fx-background-color: #2c3e50; -fx-padding: 20;">
+            <Label text="🏆 Tournament Record Management (比赛记录管理)" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" />
+        </HBox>
+    </top>
+    
+    <center>
+        <VBox spacing="10" style="-fx-padding: 20;">
+            <!-- Search bar (搜索栏) -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Search (搜索)：" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                <TextField fx:id="searchField" promptText="Enter player ID or tournament name... (输入选手ID或比赛名称...)" prefWidth="300" />
+                <Button text="🔍 Search (搜索)" onAction="#handleSearch" />
+                <Button text="Clear (清除)" onAction="#handleClearSearch" />
+            </HBox>
+            
+            <!-- Tournament record table (比赛记录表格) -->
+            <TableView fx:id="tournamentTable" prefHeight="400">
+                <columns>
+                    <TableColumn fx:id="recordIdColumn" text="Record ID (记录ID)" prefWidth="80" />
+                    <TableColumn fx:id="playerIdColumn" text="Player ID (选手ID)" prefWidth="80" />
+                    <TableColumn fx:id="tournamentNameColumn" text="Tournament Name (比赛名称)" prefWidth="200" />
+                    <TableColumn fx:id="tournamentDateColumn" text="Tournament Date (比赛日期)" prefWidth="100" />
+                    <TableColumn fx:id="rankingColumn" text="Ranking (名次)" prefWidth="80" />
+                    <TableColumn fx:id="prizeMoneyColumn" text="Prize Money (奖金)" prefWidth="120" />
+                    <TableColumn fx:id="teamColumn" text="Team (战队)" prefWidth="120" />
+                </columns>
+            </TableView>
+            
+            <!-- Detailed information (详细信息) -->
+            <Label fx:id="tournamentInfoLabel" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+            
+            <!-- Statistics information (统计信息) -->
+            <HBox spacing="20">
+                <Label fx:id="totalTournamentsLabel" style="-fx-font-weight: bold;" />
+                <Label fx:id="totalPrizeMoneyLabel" style="-fx-font-weight: bold; -fx-text-fill: green;" />
+                <Label fx:id="averagePrizeLabel" style="-fx-font-weight: bold; -fx-text-fill: blue;" />
+                <Label fx:id="championCountLabel" style="-fx-font-weight: bold; -fx-text-fill: orange;" />
+            </HBox>
+        </VBox>
+    </center>
+    
+    <bottom>
+        <HBox spacing="10" alignment="CENTER" style="-fx-padding: 15; -fx-background-color: #f4f4f4;">
+            <Button text="🔄 Refresh (刷新)" onAction="#handleRefresh" style="-fx-font-weight: bold; -fx-background-color: #3498db; -fx-text-fill: white;" />
+            <Button text="➕ Add Record (添加记录)" onAction="#handleAddTournament" style="-fx-font-weight: bold; -fx-background-color: #2ecc71; -fx-text-fill: white;" />
+            <Button text="✏️ Edit (编辑)" onAction="#handleEditTournament" style="-fx-font-weight: bold; -fx-background-color: #f39c12; -fx-text-fill: white;" />
+            <Button text="🗑️ Delete (删除)" onAction="#handleDeleteTournament" style="-fx-font-weight: bold; -fx-background-color: #e74c3c; -fx-text-fill: white;" />
+            <Button text="📊 Player Statistics (选手统计)" onAction="#handlePlayerStats" style="-fx-font-weight: bold; -fx-background-color: #9b59b6; -fx-text-fill: white;" />
+            <Button text="⬅️ Back to Main Menu (返回主菜单)" onAction="#handleBackToMain" style="-fx-font-weight: bold;" />
+        </HBox>
+    </bottom>
+</BorderPane>

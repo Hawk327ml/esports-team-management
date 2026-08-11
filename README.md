@@ -1,15 +1,25 @@
 ﻿# Esports Team Management
 
-电竞战队管理相关工程实践，覆盖组织与协作场景。
+JavaFX + MySQL desktop app for esports team ops (players, contracts, tournaments).
 
 **Portfolio:** https://hawk327ml.github.io/
 
-## Focus
+## Stack
 
-- 战队成员 / 角色组织
-- 赛程与协作流程
-- 可演示的管理界面或工具链
+- Java + JavaFX (FXML)
+- MySQL (esports_manager)
 
-## Note
+## Setup
 
-仓库说明已就绪，后续实现按迭代提交。
+1. Create MySQL database esports_manager
+2. Set env var ESPORTS_DB_PASSWORD (do not commit real passwords)
+3. Add MySQL connector JAR to the classpath
+4. Run com.esports.main.EsportsApp
+
+## Screenshots
+
+See docs/screenshots/
+
+## Security note
+
+Local DB credentials were redacted before publish. Use environment variables for secrets.

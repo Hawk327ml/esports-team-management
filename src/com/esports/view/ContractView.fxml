@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esports.controller.ContractController">
+    <top>
+        <HBox alignment="CENTER" style="-fx-background-color: #2c3e50; -fx-padding: 20;">
+            <Label text="📝 Contract Management (合同管理)" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" />
+        </HBox>
+    </top>
+    
+    <center>
+        <VBox spacing="10" style="-fx-padding: 20;">
+            <!-- Search bar (搜索栏) -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Search (搜索)：" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                <TextField fx:id="searchField" promptText="Enter player ID or team name... (输入选手ID或战队名...)" prefWidth="300" />
+                <Button text="🔍 Search (搜索)" onAction="#handleSearch" />
+                <Button text="Clear (清除)" onAction="#handleClearSearch" />
+            </HBox>
+            
+            <!-- Contract table (合同表格) -->
+            <TableView fx:id="contractTable" prefHeight="400">
+                <columns>
+                    <TableColumn fx:id="contractIdColumn" text="Contract ID (合同ID)" prefWidth="80" />
+                    <TableColumn fx:id="playerIdColumn" text="Player ID (选手ID)" prefWidth="80" />
+                    <TableColumn fx:id="teamNameColumn" text="Team Name (战队名称)" prefWidth="150" />
+                    <TableColumn fx:id="startDateColumn" text="Start Date (开始日期)" prefWidth="120" />
+                    <TableColumn fx:id="endDateColumn" text="End Date (结束日期)" prefWidth="120" />
+                    <TableColumn fx:id="salaryColumn" text="Annual Salary (年薪)" prefWidth="120" />
+                    <TableColumn fx:id="statusColumn" text="Status (状态)" prefWidth="100" />
+                </columns>
+            </TableView>
+            
+            <!-- Statistics information (统计信息) -->
+            <HBox spacing="20">
+                <Label fx:id="totalContractsLabel" style="-fx-font-weight: bold;" />
+                <Label fx:id="activeContractsLabel" style="-fx-font-weight: bold; -fx-text-fill: green;" />
+                <Label fx:id="expiringContractsLabel" style="-fx-font-weight: bold; -fx-text-fill: orange;" />
+                <Label fx:id="totalSalaryLabel" style="-fx-font-weight: bold; -fx-text-fill: blue;" />
+            </HBox>
+        </VBox>
+    </center>
+    
+    <bottom>
+        <HBox spacing="10" alignment="CENTER" style="-fx-padding: 15; -fx-background-color: #f4f4f4;">
+            <Button text="🔄 Refresh (刷新)" onAction="#handleRefresh" style="-fx-font-weight: bold; -fx-background-color: #3498db; -fx-text-fill: white;" />
+            <Button text="➕ Add Contract (添加合同)" onAction="#handleAddContract" style="-fx-font-weight: bold; -fx-background-color: #2ecc71; -fx-text-fill: white;" />
+            <Button text="✏️ Edit (编辑)" onAction="#handleEditContract" style="-fx-font-weight: bold; -fx-background-color: #f39c12; -fx-text-fill: white;" />
+            <Button text="🗑️ Delete (删除)" onAction="#handleDeleteContract" style="-fx-font-weight: bold; -fx-background-color: #e74c3c; -fx-text-fill: white;" />
+            <Button text="⬅️ Back to Main Menu (返回主菜单)" onAction="#handleBackToMain" style="-fx-font-weight: bold;" />
+        </HBox>
+    </bottom>
+</BorderPane>
