@@ -5,51 +5,38 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/esports_manager";
-    private static final String USER = "root";
-    private static final String PASSWORD = System.getenv().getOrDefault("ESPORTS_DB_PASSWORD", "changeme"); // set ESPORTS_DB_PASSWORD
-    
-    // Important: Do not use static connection, get new connection each time (重要：不要使用静态connection，每次获取新连接)
+    private static final String URL = System.getenv().getOrDefault(
+            "ESPORTS_DB_URL",
+            "jdbc:mysql://localhost:3306/esports_manager");
+    private static final String USER = System.getenv().getOrDefault("ESPORTS_DB_USER", "root");
+    private static final String PASSWORD = System.getenv().getOrDefault("ESPORTS_DB_PASSWORD", "changeme");
+    private static final boolean VERBOSE = "1".equals(System.getenv("ESPORTS_DB_VERBOSE"));
+
+    // Prefer a fresh connection per call (avoid a long-lived static Connection).
     public static Connection getConnection() {
         try {
-            System.out.println("🔄 Connecting to database... (正在连接数据库...)");
-            System.out.println("📋 URL: " + URL);
-            System.out.println("👤 User: " + USER);
-            
-            // MySQL 8.0+ and 9.0+ driver class name (MySQL 8.0+ 和 9.0+ 的驱动类名)
             Class.forName("com.mysql.cj.jdbc.Driver");
-            System.out.println("✅ MySQL driver loaded successfully (MySQL驱动加载成功)");
-            
-            // Add timezone parameters to avoid timezone errors (very important!) (添加时区参数，避免时区错误（非常重要！）)
             String urlWithParams = URL + "?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-            System.out.println("🔗 Connection URL (连接URL): " + urlWithParams);
-            
-            Connection connection = DriverManager.getConnection(urlWithParams, USER, PASSWORD);
-            System.out.println("🎉 Database connection successful! (数据库连接成功！)");
-            return connection;
-            
+            if (VERBOSE) {
+                System.out.println("Connecting: " + urlWithParams + " as " + USER);
+            }
+            return DriverManager.getConnection(urlWithParams, USER, PASSWORD);
         } catch (ClassNotFoundException e) {
-            System.out.println("❌ MySQL driver not found! (MySQL驱动未找到！)");
-            System.out.println("Please check if mysql-connector-j-9.5.0.jar is added to project library (请检查是否添加了mysql-connector-j-9.5.0.jar到项目库中)");
+            System.err.println("MySQL driver not found. Ensure mysql-connector-j is on the classpath (Maven dependency).");
             e.printStackTrace();
             return null;
         } catch (SQLException e) {
-            System.out.println("❌ Database connection failed! (数据库连接失败！)");
-            System.out.println("Error message (错误信息): " + e.getMessage());
-            System.out.println("Please check (请检查)：");
-            System.out.println("1. Is MySQL service running? (MySQL服务是否正在运行？)");
-            System.out.println("2. Is username and password correct? (用户名密码是否正确？)");
-            System.out.println("3. Does database 'esports_manager' exist? (数据库'esports_manager'是否存在？)");
+            System.err.println("Database connection failed: " + e.getMessage());
+            System.err.println("Check: MySQL running, ESPORTS_DB_PASSWORD, and that database esports_manager exists (sql/schema.sql).");
             e.printStackTrace();
             return null;
         }
     }
-    
+
     public static void closeConnection(Connection connection) {
         if (connection != null) {
             try {
                 connection.close();
-                System.out.println("🔒 Database connection closed! (数据库连接已关闭！)");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

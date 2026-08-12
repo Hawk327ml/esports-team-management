@@ -4,5 +4,6 @@
 .idea/
 out/
 bin/
+target/
 *.iml
 .DS_Store
